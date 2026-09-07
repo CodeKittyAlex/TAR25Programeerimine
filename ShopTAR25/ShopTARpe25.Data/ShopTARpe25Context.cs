@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore;
+using ShopTAR25.Models;
 
 namespace ShopTARpe25.Data
 {
@@ -11,9 +8,10 @@ namespace ShopTARpe25.Data
     {
         public ShopTARpe25Context(DbContextOptions<ShopTARpe25Context> options)
             : base(options)
-        {
-
-        }
+        { }
         
+        //public DbSet<>  { get; set; }
+        public DbSet<ErrorViewModel> ErrorViewModel { get; set; }
+              
     }
 }
