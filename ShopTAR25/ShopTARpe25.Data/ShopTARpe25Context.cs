@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ShopTAR25.Models;
+using ShopTARpe25.Core;
+using ShopTARpe25.Core.Domain;
 
 namespace ShopTARpe25.Data
 {
@@ -11,7 +12,7 @@ namespace ShopTARpe25.Data
         { }
         
         //public DbSet<>  { get; set; }
-        public DbSet<ErrorViewModel> ErrorViewModel { get; set; }
+        public DbSet<Spaceship> spaceships { get; set; }
               
     }
 }
