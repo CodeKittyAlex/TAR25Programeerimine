@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShopTAR25\ShopTAR25.csproj" />
     <ProjectReference Include="..\ShopTARpe25.Core\ShopTARpe25.Core.csproj" />
     <ProjectReference Include="..\ShopTARpe25.Data\ShopTARpe25.Data.csproj" />
   </ItemGroup>

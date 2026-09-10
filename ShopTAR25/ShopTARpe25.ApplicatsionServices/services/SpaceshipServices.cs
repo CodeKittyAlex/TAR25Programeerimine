@@ -1,10 +1,11 @@
 ﻿using ShopTARpe25.Core.Domain;
 using ShopTARpe25.Core.Dto;
+using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
 
 namespace ShopTARpe25.ApplicatsionServices.services
 {
-    public class SpaceshipServices
+    public class SpaceshipServices : ISpaceshipServises
     {
         private readonly ShopTARpe25Context _context;
 
@@ -29,10 +30,10 @@ namespace ShopTARpe25.ApplicatsionServices.services
             domain.CreatedAt = dto.CreatedAt;
             domain.ModifiedAt = dto.ModifiedAt;
 
-            await _context.spaceships.AddAsync(domain);
+            await _context.Spaceships.AddAsync(domain);
             await _context.SaveChangesAsync();
 
-            return null;
+            return domain;
         }
     }
 }
