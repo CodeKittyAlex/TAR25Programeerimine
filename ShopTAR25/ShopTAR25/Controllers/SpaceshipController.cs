@@ -1,24 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopTAR25.Models.Spaceship;
 using ShopTARpe25.ApplicatsionServices.services;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
+using ShopTARpe25.Data;
 
 namespace ShopTAR25.Controllers
 {
     public class SpaceshipController : Controller
     {
+        private readonly ShopTARpe25Context _context;
         private readonly ISpaceshipServises _spaceshipServises;
             
         public SpaceshipController
             (
+                ShopTARpe25Context context,
                 ISpaceshipServises spaceshipServices
             )
         {
+            _context = context;
             _spaceshipServises = spaceshipServices;
         }
         public IActionResult Index()
         {
+            var result = _context.Spaceships
+                .Select(x => new SpaceshipIndexViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Classification = x.Classification,
+                    BuildTime = x.BuildTime,
+                    crew = x.crew,
+                    EnginePower = x.EnginePower
+                });
+
             return View();
         }
 
