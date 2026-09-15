@@ -22,7 +22,7 @@ namespace ShopTAR25.Controllers
             _context = context;
             _spaceshipServises = spaceshipServices;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var result = _context.Spaceships
                 .Select(x => new SpaceshipIndexViewModel
@@ -35,7 +35,7 @@ namespace ShopTAR25.Controllers
                     EnginePower = x.EnginePower
                 });
 
-            return View();
+            return View(result);
         }
 
         //kui kasutaja klikib "Create" nuppu, siis see meetod käivitakse

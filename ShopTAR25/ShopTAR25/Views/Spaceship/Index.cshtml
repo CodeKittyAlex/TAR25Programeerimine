@@ -1,11 +1,54 @@
-﻿@model ShopTAR25.Models.Spaceship.SpaceshipIndexViewModel
+﻿@model IEnumerable<ShopTAR25.Models.Spaceship.SpaceshipIndexViewModel>
 
 @{
     ViewData["title"] = "index";
 }
 
-<h2>index</h2>
+<h1>Spaceships</h1>
 
 <div>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create Newa</a>
 </div>
+<form method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>nr</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>build Date</th>
+                <th>crew</th>
+                <th></th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(Model => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(Model => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(Model => item.Classification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(Model => item.BuildTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(Model => item.crew)
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    
+    </table>
+</form>
