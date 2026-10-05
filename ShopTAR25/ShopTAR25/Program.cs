@@ -16,7 +16,9 @@ namespace ShopTAR25
 
             builder.Services.AddScoped<ISpaceshipServises, SpaceshipServices>();
 
-            //selleks tuleb installida Microsoft.EntityFrameworkCore.SqlServer
+             //selleks, et tuleb installida Microsoft.EntityFrameworkCore.SqlServer
+            //ja Microsoft.EntityFrameworkCore.Tools NuGet paketid
+            //kui installitud, siis viidata namespacesis Microsoft.EntityFrameworkCore-le
             builder.Services.AddDbContext<ShopTARpe25Context>(options => 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

@@ -6,5 +6,8 @@ namespace ShopTARpe25.Core.ServiceInterface
     public interface ISpaceshipServises
     {
         Task<Spaceship> Create(SpaceshipDto dto);
+        Task<Spaceship> DetailsAsync(Guid id);
+        Task<Spaceship> Update(SpaceshipDto dto);
+        Task<Spaceship> Delete(Guid id);
     }
 }
