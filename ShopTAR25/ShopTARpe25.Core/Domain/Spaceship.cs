@@ -8,7 +8,7 @@ namespace ShopTARpe25.Core.Domain
         public string Name { get; set; } = string.Empty;
         public string Classification { get; set; } = string.Empty;
         public DateTime? BuildTime { get; set; }
-        public int? crew { get; set; }
+        public int? Crew { get; set; }
         public int? EnginePower { get; set; }
 
         public DateTime? CreatedAt { get; set; }
