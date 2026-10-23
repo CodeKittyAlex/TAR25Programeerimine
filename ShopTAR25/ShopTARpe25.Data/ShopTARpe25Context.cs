@@ -8,10 +8,11 @@ namespace ShopTARpe25.Data
     {
         public ShopTARpe25Context(DbContextOptions<ShopTARpe25Context> options)
             : base(options)
-        { }
+        { 
+        }
         
         //public DbSet<>  { get; set; }
         public DbSet<Spaceship> Spaceships { get; set; }
-              
+        public DbSet<FileToApi> FileToApis { get; set; }
     }
 }
