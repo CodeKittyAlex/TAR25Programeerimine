@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopTAR25.Models.Spaceship;
+using ShopTARpe25.ApplicatsionServices.services;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
 using ShopTARpe25.Data;
@@ -30,7 +31,7 @@ namespace ShopTAR25.Controllers
                     Name = x.Name,
                     Classification = x.Classification,
                     BuildTime = x.BuildTime,
-                    crew = x.crew,
+                    Crew = x.Crew,
                     EnginePower = x.EnginePower
                 });
 
@@ -53,7 +54,7 @@ namespace ShopTAR25.Controllers
                 Name = vm.Name,
                 Classification = vm.Classification,
                 BuildTime = vm.BuildTime,
-                crew = vm.Crew,
+                Crew = vm.Crew,
                 EnginePower = vm.EnginePower
             };
 
@@ -68,7 +69,7 @@ namespace ShopTAR25.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             //meetodi kutsumine interfacest
-            var spaceship = await _spaceshipService.DetailsAsync(id);
+            var spaceship = await _spaceshipServises.DetailsAsync(id);
 
             //veakäsitlus
             //suunab vaatele NotFound, kui andmeid ei ole
@@ -82,7 +83,7 @@ namespace ShopTAR25.Controllers
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuiltDate;
+            vm.BuiltDate = spaceship.BuildTime;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
@@ -94,7 +95,7 @@ namespace ShopTAR25.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var spaceship = await _spaceshipService.DetailsAsync(id);
+            var spaceship = await _spaceshipServises.DetailsAsync(id);
 
             if (spaceship == null)
             {
@@ -106,7 +107,7 @@ namespace ShopTAR25.Controllers
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuiltDate;
+            vm.BuiltDate = spaceship.BuildTime;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
@@ -125,12 +126,12 @@ namespace ShopTAR25.Controllers
                 Classification = vm.Classification,
                 Crew = vm.Crew,
                 EnginePower = vm.EnginePower,
-                BuiltDate = vm.BuiltDate,
+                BuildTime = vm.BuiltDate,
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt
             };
 
-            var result = await _spaceshipService.Update(dto);
+            var result = await _spaceshipServises.Update(dto);
 
             if (result == null)
             {
@@ -143,7 +144,7 @@ namespace ShopTAR25.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var spaceship = await _spaceshipService.DetailsAsync(id);
+            var spaceship = await _spaceshipServises.DetailsAsync(id);
 
             if (spaceship == null)
             {
@@ -155,7 +156,7 @@ namespace ShopTAR25.Controllers
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuiltDate;
+            vm.BuiltDate = spaceship.BuildTime;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
@@ -167,7 +168,7 @@ namespace ShopTAR25.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
-            var result = await _spaceshipService.Delete(id);
+            var result = await _spaceshipServises.Delete(id);
 
             if (result == null)
             {

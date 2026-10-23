@@ -26,7 +26,7 @@ namespace ShopTARpe25.ApplicatsionServices.services
             domain.Name = dto.Name;
             domain.Classification = dto.Classification;
             domain.BuildTime = dto.BuildTime;
-            domain.crew = dto.crew;
+            domain.Crew = dto.Crew;
             domain.EnginePower = dto.EnginePower;
             domain.CreatedAt = dto.CreatedAt;
             domain.ModifiedAt = dto.ModifiedAt;
@@ -51,7 +51,7 @@ namespace ShopTARpe25.ApplicatsionServices.services
             spaceship.Id = dto.Id;
             spaceship.Name = dto.Name;
             spaceship.Classification = dto.Classification;
-            spaceship.BuiltDate = dto.BuiltDate;
+            spaceship.BuildTime = dto.BuildTime;
             spaceship.Crew = dto.Crew;
             spaceship.EnginePower = dto.EnginePower;
             spaceship.CreatedAt = dto.CreatedAt;
