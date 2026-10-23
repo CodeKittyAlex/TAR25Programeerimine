@@ -146,7 +146,7 @@ namespace ShopTAR25.Controllers
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Classification = spaceship.Classification;
-            vm.BuiltDate = spaceship.BuildTime;
+            vm.BuildTime = spaceship.BuildTime;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
