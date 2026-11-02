@@ -14,6 +14,6 @@ namespace ShopTARpe25.Data
         //public DbSet<>  { get; set; }
         public DbSet<Spaceship> Spaceships { get; set; }
         public DbSet<FileToApi> FileToApis { get; set; }
-        //public DbSet<Kindergarden> { get; set; }
+        public DbSet<Kindergarden> Kindergardens { get; set; }
     }
 }
