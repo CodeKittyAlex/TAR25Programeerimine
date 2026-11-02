@@ -8,6 +8,9 @@ namespace ShopTARpe25.Core.ServiceInterface
 {
     public interface IKindergardenServises
     {
-        Task<Spaceship> Create(KindergardenDto dto);
+        Task<Kindergarden> Create(KindergardenDto dto);
+        Task<Kindergarden> DetailsAsync(Guid id);
+        Task<Kindergarden> Update(KindergardenDto dto);
+        Task<Kindergarden> Delete(Guid id);
     }
 }
