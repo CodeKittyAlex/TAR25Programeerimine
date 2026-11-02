@@ -1,6 +1,6 @@
 ﻿namespace ShopTARpe25.Core.Dto
 {
-    public class kindergardenDto
+    public class KindergardenDto
     {
         public Guid? Id { get; set; }
         public string GroupName { get; set; }

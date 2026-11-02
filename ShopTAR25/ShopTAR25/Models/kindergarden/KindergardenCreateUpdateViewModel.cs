@@ -1,4 +1,4 @@
-﻿namespace ShopTAR25.Models.kindergarden
+﻿namespace ShopTAR25.Models.Kindergarden
 {
     public class KindergardenCreateUpdateViewModel
     {
