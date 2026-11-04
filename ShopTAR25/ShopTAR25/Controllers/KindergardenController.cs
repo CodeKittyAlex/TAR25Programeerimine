@@ -11,15 +11,18 @@ namespace ShopTAR25.Controllers
     {
         private readonly IKindergardenServises _KindergardenServises;
         private readonly ShopTARpe25Context _context;
+        private readonly IFileServices _fileService;
 
         public KindergardenController
             (
                 IKindergardenServises kindergardenServises,
-                ShopTARpe25Context context
+                ShopTARpe25Context context,
+                IFileServices fileService
             )
         {
             _KindergardenServises = kindergardenServises;
             _context = context;
+            _fileService = fileService;
         }
 
         public async Task<IActionResult> Index()
@@ -53,6 +56,14 @@ namespace ShopTAR25.Controllers
                 ChildrenCount = vm.ChildrenCount,
                 KindergartenName = vm.KindergartenName,
                 TeacherName = vm.TeacherName,
+                Files = vm.Files,
+                FileToApiDtos = vm.Image
+                    .Select(file => new FileToApiDto
+                    {
+                        Id = file.ImageId,
+                        ExistingFilePath = file.FilePath,
+                        SpaceshipId = file.SpaceshipId
+                    }).ToArray()
             };
 
             var result = await _KindergardenServises.Create(dto);

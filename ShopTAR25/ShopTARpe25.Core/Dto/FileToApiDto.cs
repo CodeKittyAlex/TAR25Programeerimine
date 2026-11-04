@@ -7,5 +7,6 @@ namespace ShopTARpe25.Core.Dto
         //see muutuja hakkab näitama, kus asub meie file
         public string? ExistingFilePath { get; set; }
         public Guid? SpaceshipId { get; set; }
+        public Guid? KindergardenId { get; set; }
     }
 }
