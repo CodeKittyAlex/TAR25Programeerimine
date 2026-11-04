@@ -16,6 +16,7 @@ namespace ShopTAR25
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<ISpaceshipServises, SpaceshipServices>();
+            builder.Services.AddScoped<IKindergardenServises, KindergardenServices>();
             builder.Services.AddScoped<IFileServices, FileServices>();
 
             //selleks, et tuleb installida Microsoft.EntityFrameworkCore.SqlServer
