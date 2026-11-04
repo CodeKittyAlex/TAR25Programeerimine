@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopTAR25.Models.Kindergarden;
 using ShopTARpe25.Core.Dto;
 using ShopTARpe25.Core.ServiceInterface;
@@ -62,7 +63,7 @@ namespace ShopTAR25.Controllers
                     {
                         Id = file.ImageId,
                         ExistingFilePath = file.FilePath,
-                        SpaceshipId = file.SpaceshipId
+                        KindergardenId = file.KindergardenId
                     }).ToArray()
             };
 
@@ -86,6 +87,15 @@ namespace ShopTAR25.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.KindergardenId == Id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = /*"~/multipleFileUpload/" +*/ y.ExistingFilePath,
+                    ImageId = y.Id,
+                    KindergardenId = y.KindergardenId
+                }).ToArrayAsync();
+
             var vm = new KindergardenDetailsViewModel();
 
             vm.Id = kindergarden.Id;
@@ -95,7 +105,8 @@ namespace ShopTAR25.Controllers
             vm.TeacherName = kindergarden.TeacherName;
             vm.CreatedAt = kindergarden.CreatedAt;
             vm.UpdatedAt = kindergarden.UpdatedAt;
-           
+            vm.Images.AddRange(images);
+
             return View(vm);
         }
 
@@ -109,6 +120,15 @@ namespace ShopTAR25.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.KindergardenId == Id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id,
+                    KindergardenId = y.KindergardenId
+                }).ToArrayAsync();
+
             var vm = new KindergardenCreateUpdateViewModel();
 
             vm.Id = kindergarden.Id;
@@ -118,6 +138,7 @@ namespace ShopTAR25.Controllers
             vm.TeacherName = kindergarden.TeacherName;
             vm.CreatedAt = kindergarden.CreatedAt;
             vm.UpdatedAt = kindergarden.UpdatedAt;
+            vm.Image.AddRange(images);
 
             return View(vm);
         }
@@ -131,6 +152,14 @@ namespace ShopTAR25.Controllers
                 ChildrenCount = vm.ChildrenCount,
                 KindergartenName = vm.KindergartenName,
                 TeacherName = vm.TeacherName,
+                Files = vm.Files,
+                FileToApiDtos = vm.Image
+                    .Select(file => new FileToApiDto
+                    {
+                        Id = file.ImageId,
+                        ExistingFilePath = file.FilePath,
+                        KindergardenId = file.KindergardenId
+                    }).ToArray()
             };
 
             var result = await _KindergardenServises.Update(dto);
@@ -153,6 +182,15 @@ namespace ShopTAR25.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.KindergardenId == Id)
+                .Select(y => new ImageViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id,
+                    KindergardenId = y.KindergardenId
+                }).ToArrayAsync();
+
             var vm = new KindergardenDeleteViewModel();
 
             vm.Id = kindergarden.Id;
@@ -162,6 +200,7 @@ namespace ShopTAR25.Controllers
             vm.TeacherName = kindergarden.TeacherName;
             vm.CreatedAt = kindergarden.CreatedAt;
             vm.UpdatedAt = kindergarden.UpdatedAt;
+            vm.Images.AddRange(images);
 
             return View(vm);
         }
@@ -172,6 +211,22 @@ namespace ShopTAR25.Controllers
             var result = await _KindergardenServises.Delete(id);
 
             if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> RemoveImage(ImageViewModel vm)
+        {
+            var dto = new FileToApiDto()
+            {
+                Id = vm.ImageId
+            };
+
+            var image = await _fileService.RemoveImageFromApiK(dto);
+
+            if (image == null)
             {
                 return RedirectToAction(nameof(Index));
             }
